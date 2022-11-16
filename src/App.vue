@@ -1,16 +1,38 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from "vue";
+import { RouterLink, RouterView } from "vue-router";
+import HelloWorld from "./components/HelloWorld.vue";
+
+const snackbarIsVisible = ref(true);
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img
+      alt="Vue logo"
+      class="logo"
+      src="@/assets/logo.svg"
+      width="125"
+      height="125"
+    />
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
 
       <nav>
+        <v-snackbar v-model="snackbarIsVisible">
+          Hello, Vuetify here
+
+          <template v-slot:actions>
+            <v-btn
+              color="pink"
+              variant="text"
+              @click="snackbarIsVisible = false"
+            >
+              Close
+            </v-btn>
+          </template>
+        </v-snackbar>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
